@@ -1,0 +1,53 @@
+/*---------servicoj----------*/
+.serv-titles {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.serv-headers {
+  color: var(--primaryDarker) !important;
+}
+.serv-p {
+  text-align: justify;
+  max-width: 70ch;
+}
+.serv-h4 {
+  color: var(--primaryDark) !important;
+  opacity: 0.25;
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin: 0 0 40px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.serv-h4 span {
+  padding-bottom: 8px;
+  position: relative;
+}
+
+.serv-h4 span::after {
+  color: var(--primaryDark) !important;
+  opacity: 0.5;
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 3px solid;
+}
+.serv-h2 {
+  color: var(--primaryDarker) !important;
+  position: relative;
+  margin: 0 0 40px;
+  margin-bottom: 40px;
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.serv-h2 span {
+  padding-bottom: 8px;
+  position: relative;
+}

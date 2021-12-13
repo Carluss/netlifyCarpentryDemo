@@ -1,0 +1,62 @@
+{
+  "servicos": {
+    "titlo": "OUR SERVICES",
+    "subTitlo": "WHAT WE DO",
+    "servicos": [
+      {
+        "key": "1",
+        "image": "key icon",
+        "title": "Serviços Gerais de Carpintaria",
+        "subTitle": "Tellus suscipit laoreet. Curabitur tempus tortor quis tellus",
+        "content": "Tellus suscipit laoreet. Curabitur tempus tortor quis tellusconsectetur scelerisque. Curabitur feugiat, mi non temporefficitur,eros justo placerat ipsum, non commodo nibh dui atdolor. Praesentelementum augue non arcu aliquet, id convallis mdignissim. Crassollicitudin dolor eros, quis aliquet lectustristique in."
+      },
+      {
+        "key": "2",
+        "title": "Serviços de restauração",
+        "content": "Tellus suscipit laoreet. Curabitur tempus tortor quis tellus,consectetur scelerisque. Curabitur feugiat, mi non temporefficitur,eros justo placerat ipsum, non commodo nibh dui atdolor. Praesentelementum augue non arcu aliquet, id convallis midignissim. Crassollicitudin dolor eros, quis aliquet lectustristique in."
+      },
+      {
+        "key": "3",
+        "title": "Portas, Pavimentos etc...",
+        "content": "Ipsum, non commodo nibh dui at dolor. Praesentelementum augue nonarcu aliquet, id convallis mi dignissim. Crassollicitudin doloreros, quis aliquet lectus tristique in."
+      }
+    ]
+  },
+  "rollImg": {
+    "titlo": "Porfolio",
+    "servicos": [
+      {
+        "key": "1",
+        "title": "Cozinhas",
+        "content": "Tellus suscipit laoreet. Curabitur tempus tortor quis tellus consectetur scelerisque. Curabitur feugiat, mi non tempor efficitur.Tellus suscipit laoreet."
+      }
+    ]
+  },
+  "sobrenos": {
+    "titlo": "ABOUT US",
+    "content": "Fusce non nisi viverra, efficitur tortor a, feugiat diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam lacinia ipsum a molestie accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed imperdiet, augue mollis mollis hendrerit."
+  },
+  "contactos": {
+    "titlo": "CONTACTS",
+    "subtitlo": "OUR LOCATION"
+  },
+  "footer": {
+    "atendimento": "Open time",
+    "tempo": "Monday to Friday",
+    "hora": "08:00-17:00",
+    "contactos": "Contacts"
+  },
+  "header": {
+    "info": "#KITCHENS #FLOORS #WINDOWS #DOORS",
+    "subtitle": "Serviços de Carpintária especializados."
+  },
+  "menu": {
+    "portfolio": "Portfolio",
+    "projetos": "Projects",
+    "contactos": "Contact us"
+  },
+  "portfolio": {
+    "titlo": "Portfolio",
+    "categorias": "?"
+  }
+}
