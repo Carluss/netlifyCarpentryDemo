@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 
 import Titles from "../../util/Titles";
 import "../content.css";
@@ -7,10 +7,8 @@ import Info from "./Info";
 import { MOBILE_WIDTH } from "../../util/Const";
 
 const Contacts = (props) => {
-  const renders = useRef(0);
   return (
     <>
-      <div>{renders.current++}</div>
       <Titles order={false} title="CONTACTOS" subtitle="A NOSSA LOCALIZAÇÂO" />
       <div ref={props.innerRef} className="ui container">
         {props.width <= MOBILE_WIDTH ? <Info info={false} /> : null}

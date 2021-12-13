@@ -171,6 +171,7 @@ html {
   z-index: 401;
   top: 0;
   right: 15px;
+  width: fit-content !important;
 }
 /*    position: absolute;
     left: 50%;
