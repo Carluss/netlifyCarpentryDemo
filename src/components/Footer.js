@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Grid, Segment } from "semantic-ui-react";
 
 import { SAPO_EMAIL, GMAIL, MORADA, PHONE } from "./util/Const";
