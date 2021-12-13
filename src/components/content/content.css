@@ -171,6 +171,8 @@ html {
   z-index: 401;
   top: 0;
   right: 15px;
+}
+.overlay-form .content {
   width: fit-content !important;
 }
 /*    position: absolute;
