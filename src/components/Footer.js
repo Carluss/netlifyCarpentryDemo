@@ -5,10 +5,8 @@ import { SAPO_EMAIL, GMAIL, MORADA, PHONE } from "./util/Const";
 import "./content/content.css";
 
 const Footer = React.memo(() => {
-  const renders = useRef(0);
   return (
     <div className="ui inverted vertical segment footer-segment">
-      <div>{renders.current++}</div>
       <div className="ui container">
         <Grid centered>
           <Grid.Row columns={2}>

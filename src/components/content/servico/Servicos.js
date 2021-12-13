@@ -16,7 +16,6 @@ import "./servico.css";
 
 const Servicoj = React.memo(
   (props) => {
-    const renders = useRef(0);
     const [visible, setVisible] = useState(props.servViewd);
 
     useEffect(() => {
@@ -73,7 +72,6 @@ const Servicoj = React.memo(
         <div className="ui middle aligned stackable grid container">
           <div className="row">
             <div className="nine wide centered column">
-              <div>{renders.current++}</div>
               {renderServicosAnimeted()}
             </div>
 
