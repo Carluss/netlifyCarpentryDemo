@@ -40,7 +40,7 @@ export const PATHS = [
   { path: "/", content: "MPrates & Filhos" },
   { path: "/portfolio", content: "Portfólio" },
   { path: "/projetos", content: "Projetos" },
-  { path: "/contactos", content: "Contactos" },
+  { path: "/contactos", content: "Contacte-nos" },
 ];
 export const MOBILE_PATHS = [
   {

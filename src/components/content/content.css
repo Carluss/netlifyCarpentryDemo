@@ -54,6 +54,10 @@ html {
   background: var(--primaryDarker) !important;
 }
 /*------------Header----------------*/
+.header-cs {
+  width: 97vw;
+  margin: 0 auto !important;
+}
 .pseudo-background-img {
   position: absolute;
   top: 0;

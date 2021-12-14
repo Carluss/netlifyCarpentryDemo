@@ -8,14 +8,13 @@ import { changePath, scrollContacts, servicosViewed } from "../actions";
 import history from "../history";
 import { MOBILE_WIDTH, PATHS, MOBILE_PATHS } from "./util/Const";
 
-const headerLargeSrc = `/images/pedro-da-silva-cUIIJhUa538-unsplash-large.webp`;
-const headerNormalSrc = `/images/pedro-da-silva-cUIIJhUa538-unsplash.webp`;
-const headerMobileSrc = `/images/pedro-da-silva-cUIIJhUa538-unsplash-mobile.webp`;
+const headerLargeSrc = `/images/cetteup-IC5sX-7PRN8-unsplash-large.webp`;
+const headerNormalSrc = `/images/cetteup-IC5sX-7PRN8-unsplash.webp`;
+const headerMobileSrc = `/images/cetteup-IC5sX-7PRN8-unsplash-mobile.webp`;
 class Header extends React.Component {
   state = {
     visible: false,
   };
-  renders = React.createRef(0);
 
   renderMenu(paths) {
     return paths.map(({ path, content }) => {
@@ -104,10 +103,9 @@ class Header extends React.Component {
   render() {
     return (
       <div className="masthead header-white">
-        <Menu color="brown" secondary size="huge">
+        <Menu color="brown" secondary size="huge" className="header-cs">
           <img
             className="pseudo-background-img"
-            src={headerMobileSrc}
             srcSet={`${headerMobileSrc} 768w, ${headerNormalSrc} 2400w, ${headerLargeSrc} 3040w`}
             alt="header"
           />

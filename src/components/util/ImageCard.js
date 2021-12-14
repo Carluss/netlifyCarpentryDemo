@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { connect } from "react-redux";
-import { Transition } from "semantic-ui-react";
+import { Transition, Dimmer, Loader } from "semantic-ui-react";
 
 import { filterApplied } from "../../actions";
 
@@ -138,8 +138,15 @@ class ImageCard extends React.Component {
             </div>
           </div>
         </Transition>
+
         {this.state.isOpen ? (
-          <Suspense fallback={<>Loading...</>}>
+          <Suspense
+            fallback={
+              <Dimmer active>
+                <Loader />
+              </Dimmer>
+            }
+          >
             <ModalLightBox
               image={this.props.image}
               handleIsOpen={this.handleIsOpen.bind(this)}

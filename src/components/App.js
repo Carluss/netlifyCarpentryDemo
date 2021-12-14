@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { changePath } from "../actions";
@@ -16,9 +16,9 @@ import { IMAGESPROJECT, IMAGESPORTFOLIO } from "./util/Const";
 import "./content/content.css";
 import "react-image-lightbox/style.css"; // This only needs to be imported once in your app
 
-const Home = lazy(() => import("./content/Home"));
-const Portfolio = lazy(() => import("./content/portfolio/Portfolio"));
-const ProjectsPage = lazy(() => import("./content/projectsPage/ProjectsPage"));
+import Home from "./content/Home";
+import Portfolio from "./content/portfolio/Portfolio";
+import ProjectsPage from "./content/projectsPage/ProjectsPage";
 
 class App extends React.Component {
   state = {
@@ -31,6 +31,7 @@ class App extends React.Component {
   };
 
   componentDidMount() {
+    console.log("https://github.com/Carluss/netlifyCarpentryDemo");
     this.unlisten = history.listen((location, action) => {
       if (action === "POP") {
         this.props.changePath(location.pathname);
@@ -69,28 +70,26 @@ class App extends React.Component {
               handleOpenMenu={this.handleOpenMenu}
               open={this.state.headerMenu}
             />
-            <Suspense fallback={<>Loading...</>}>
-              <Switch>
-                <Route path="/" exact>
-                  <Home calculations={this.state.calculations} />
-                </Route>
-                <Route path="/portfolio" exact>
-                  <Portfolio
-                    title="Porfólio"
-                    card={false}
-                    images={IMAGESPORTFOLIO}
-                  />
-                </Route>
-                <Route path="/projetos" exact>
-                  <ProjectsPage
-                    title="Projetos"
-                    card={true}
-                    images={IMAGESPROJECT}
-                  />
-                </Route>
-                <Redirect to="/" />
-              </Switch>
-            </Suspense>
+            <Switch>
+              <Route path="/" exact>
+                <Home calculations={this.state.calculations} />
+              </Route>
+              <Route path="/portfolio" exact>
+                <Portfolio
+                  title="Porfólio"
+                  card={false}
+                  images={IMAGESPORTFOLIO}
+                />
+              </Route>
+              <Route path="/projetos" exact>
+                <ProjectsPage
+                  title="Projetos"
+                  card={true}
+                  images={IMAGESPROJECT}
+                />
+              </Route>
+              <Redirect to="/" />
+            </Switch>
             <Footer />
           </Visibility>
         </Router>
