@@ -1,13 +1,17 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { Transition } from "semantic-ui-react";
 
 import { filterApplied } from "../../actions";
 
-import ModalLightBox from "./ModalLightBox";
+const ModalLightBox = lazy(() => import("./ModalLightBox"));
 
 class ImageCard extends React.Component {
-  state = { spans: 0, isOpen: false, visible: true };
+  state = {
+    spans: 0,
+    isOpen: false,
+    visible: true,
+  };
   imageRef = React.createRef();
 
   componentDidMount() {
@@ -74,6 +78,8 @@ class ImageCard extends React.Component {
     //console.log("Inside Image Card", this.props.filter);
 
     const { alt_description, cat, port } = this.props.image;
+    const { spans } = this.state;
+    const imageStyle = spans === 0 ? { visibility: "hidden" } : {};
     return (
       <>
         <Transition
@@ -111,8 +117,8 @@ class ImageCard extends React.Component {
                       <i className="images icon"></i>
                     </div>
                   ) : null}
-
                   <img
+                    style={imageStyle}
                     className="small image"
                     ref={this.imageRef}
                     alt={alt_description}
@@ -133,10 +139,12 @@ class ImageCard extends React.Component {
           </div>
         </Transition>
         {this.state.isOpen ? (
-          <ModalLightBox
-            image={this.props.image}
-            handleIsOpen={this.handleIsOpen}
-          />
+          <Suspense fallback={<>Loading...</>}>
+            <ModalLightBox
+              image={this.props.image}
+              handleIsOpen={this.handleIsOpen.bind(this)}
+            />
+          </Suspense>
         ) : null}
       </>
     );

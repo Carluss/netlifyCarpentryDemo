@@ -18,7 +18,7 @@ const QuemSomos = () => {
         <div className="five wide right floated column">
           <img
             className="ui large rounded image"
-            src="/images/logo.png"
+            src="/images/logo.webp"
             alt="logo"
           />
         </div>

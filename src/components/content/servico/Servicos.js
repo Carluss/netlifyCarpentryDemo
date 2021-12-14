@@ -47,6 +47,7 @@ const Servicoj = React.memo(
             animation="fade right"
             duration={time}
             onComplete={() => props.servicosViewed()}
+            mountOnShow={false}
           >
             <div style={{ marginTop: "20px" }}>
               <Servico
@@ -78,7 +79,7 @@ const Servicoj = React.memo(
             <div className="seven wide right floatedca column">
               <img
                 className="ui bordered rounded image"
-                src="/images/iqbal-anggawibawa-TWR8UHtxFFA-unsplash.jpg"
+                src="/images/iqbal-anggawibawa-TWR8UHtxFFA-unsplash.webp"
                 alt="qwerty"
               ></img>
             </div>

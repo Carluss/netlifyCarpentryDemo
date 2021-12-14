@@ -39,7 +39,7 @@ const RollImg = (props) => {
               <div className="roll-img-container">
                 <img
                   className="ui rounded image roll-img"
-                  src="/images/roll/mateusz-butkiewicz-2Ue8MIYmQyM-unsplash.jpg"
+                  src="/images/roll/p1.webp"
                   alt="qwerty"
                 />
               </div>
@@ -72,7 +72,7 @@ const RollImg = (props) => {
               <div className="roll-img-container">
                 <img
                   className="ui rounded image roll-img"
-                  src="/images/roll/dane-deaner-l2eTNVrendQ-unsplash.jpg"
+                  src="/images/roll/p2.webp"
                   alt="qwerty"
                 />
               </div>
