@@ -5,23 +5,7 @@ import history from "../../history";
 class ModalLightBox extends React.Component {
   state = { photoIndex: 0 };
 
-  componentDidMount() {
-    this.unlisten = history.listen((location, action) => {
-      if (
-        (location.pathname === "/portfolio" ||
-          location.pathname === "/projetos") &&
-        location.hash === "" &&
-        action === "POP"
-      ) {
-        this.props.handleIsOpen();
-      }
-      // console.log("on route change loc", location, " acto.: ", action);
-    });
-  }
-
   componentWillUnmount() {
-    //console.log("TH", window.location);
-
     if (
       (window.location.pathname === "/portfolio" ||
         window.location.pathname === "/projetos") &&
@@ -30,7 +14,6 @@ class ModalLightBox extends React.Component {
       this.props.handleIsOpen();
       history.goBack();
     }
-    this.unlisten();
   }
 
   render() {

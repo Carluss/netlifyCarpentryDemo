@@ -1,8 +1,10 @@
 import React, { lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { Transition, Dimmer, Loader } from "semantic-ui-react";
+import history from "../../history";
 
 import { filterApplied } from "../../actions";
+import { ResponsiveImageThumbnail } from "./ResponsiveImage";
 
 const ModalLightBox = lazy(() => import("./ModalLightBox"));
 
@@ -11,6 +13,7 @@ class ImageCard extends React.Component {
     spans: 0,
     isOpen: false,
     visible: true,
+    dimmer: true,
   };
   imageRef = React.createRef();
 
@@ -18,11 +21,23 @@ class ImageCard extends React.Component {
     if (this.imageRef.current) {
       this.imageRef.current.addEventListener("load", this.setSpans);
     }
+    this.unlisten = history.listen((location, action) => {
+      if (
+        (location.pathname === "/portfolio" ||
+          location.pathname === "/projetos") &&
+        location.hash === "" &&
+        action === "POP"
+      ) {
+        this.handleIsOpen();
+      }
+      // console.log("on route change loc", location, " acto.: ", action);
+    });
   }
   componentWillUnmount() {
     if (this.imageRef.current) {
       this.imageRef.current.removeEventListener("load", this.setSpans);
     }
+    this.unlisten();
   }
 
   setSpans = () => {
@@ -70,14 +85,23 @@ class ImageCard extends React.Component {
     });
   }
 
-  handleIsOpen = () => {
-    this.setState({ isOpen: false });
+  handleIsOpen = (e) => {
+    if (e !== undefined) {
+      history.goBack();
+    }
+    this.setState({
+      dimmer: false,
+      isOpen: false,
+    });
+    this.setState({
+      dimmer: true,
+    });
   };
 
   render() {
     //console.log("Inside Image Card", this.props.filter);
 
-    const { alt_description, cat, port } = this.props.image;
+    const { alt_description, cat, port, thumbnail } = this.props.image;
     const { spans } = this.state;
     const imageStyle = spans === 0 ? { visibility: "hidden" } : {};
     return (
@@ -117,12 +141,12 @@ class ImageCard extends React.Component {
                       <i className="images icon"></i>
                     </div>
                   ) : null}
-                  <img
-                    style={imageStyle}
-                    className="small image"
-                    ref={this.imageRef}
+                  <ResponsiveImageThumbnail
+                    image={thumbnail}
+                    styleI={imageStyle}
+                    innerRef={this.imageRef}
                     alt={alt_description}
-                    src={port[0]}
+                    classNameI="small image"
                   />
                 </div>
               </a>
@@ -142,7 +166,10 @@ class ImageCard extends React.Component {
         {this.state.isOpen ? (
           <Suspense
             fallback={
-              <Dimmer active>
+              <Dimmer
+                active={this.state.dimmer}
+                onClick={(e) => this.handleIsOpen(e)}
+              >
                 <Loader />
               </Dimmer>
             }
