@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { Dropdown, Input } from "semantic-ui-react";
 
-import { connect } from "react-redux";
-import { filterApplied } from "../../../actions";
 import { PORTFOLIO_BUTTONS_CAT } from "../../util/Const";
 
-const Pbuttons = (props) => {
+const Pbuttons = React.memo((props) => {
   const [searchFil, setSearchFil] = useState("");
 
   const renderDropDownItem = (searchFilter) => {
@@ -82,10 +80,6 @@ const Pbuttons = (props) => {
   };
 
   return <div className="dropDown-se">{renderButtonsMobile()}</div>;
-};
+});
 
-const mapStateToProps = (state) => {
-  return { filter: state.path.filter };
-};
-
-export default connect(mapStateToProps, { filterApplied })(Pbuttons);
+export default Pbuttons;

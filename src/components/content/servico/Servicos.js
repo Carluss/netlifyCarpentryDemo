@@ -1,40 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { Transition } from "semantic-ui-react";
-import { connect } from "react-redux";
 
-import { servicosViewed } from "../../../actions";
 import {
   ANIMATION_TIME,
   ANIMATION_TIME_PLUS,
   MOBILE_WIDTH,
   SERVICOS,
-  ANIMATION_TIME_PASSED,
 } from "../../util/Const";
 import Servico from "./Servico";
 import Titles from "../../util/Titles";
+import useOnScreen from "../../util/useOnScreen";
 import "./servico.css";
 
 const Servicoj = React.memo(
   (props) => {
     const [visible, setVisible] = useState(props.servViewd);
 
+    const [titleRef, isVisible] = useOnScreen("-400px", 0.6, props.servViewd);
+
     useEffect(() => {
       if (
         props.width <= MOBILE_WIDTH &&
         props.width > 10 &&
-        props.pixelsPassed >= 0 &&
         visible === false
       ) {
         console.log("MOIBIL");
         setVisible(true);
-      } else if (
-        props.pixelsPassed > ANIMATION_TIME_PASSED &&
-        visible === false
-      ) {
+      } else if (isVisible && visible === false) {
         setVisible(true);
+        props.servicosViewed();
         console.log("PC");
       }
-    }, [props, visible]);
+    }, [props, visible, isVisible]);
 
     const renderServicosAnimeted = () => {
       var time = ANIMATION_TIME;
@@ -46,7 +43,6 @@ const Servicoj = React.memo(
             visible={visible}
             animation="fade right"
             duration={time}
-            onComplete={() => props.servicosViewed()}
             mountOnShow={false}
           >
             <div style={{ marginTop: "20px" }}>
@@ -70,7 +66,10 @@ const Servicoj = React.memo(
           title="OS NOSSOS SERVIÇOS"
           subtitle="O QUE FAZEMOS"
         />
-        <div className="ui middle aligned stackable grid container">
+        <div
+          ref={titleRef}
+          className="ui middle aligned stackable grid container"
+        >
           <div className="row">
             <div className="nine wide centered column">
               {renderServicosAnimeted()}
@@ -96,8 +95,4 @@ const Servicoj = React.memo(
   }
 );
 
-const mapStateToProps = (state) => {
-  return { servViewd: state.path.servicos_viewed };
-};
-
-export default connect(mapStateToProps, { servicosViewed })(Servicoj);
+export default Servicoj;

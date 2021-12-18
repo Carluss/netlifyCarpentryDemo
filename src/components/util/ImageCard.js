@@ -1,14 +1,12 @@
 import React, { lazy, Suspense } from "react";
-import { connect } from "react-redux";
 import { Transition, Dimmer, Loader } from "semantic-ui-react";
 import history from "../../history";
 
-import { filterApplied } from "../../actions";
 import { ResponsiveImageThumbnail } from "./ResponsiveImage";
 
 const ModalLightBox = lazy(() => import("./ModalLightBox"));
 
-class ImageCard extends React.Component {
+class ImageCard extends React.PureComponent {
   state = {
     spans: 0,
     isOpen: false,
@@ -185,8 +183,4 @@ class ImageCard extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return { filter: state.path.filter };
-};
-
-export default connect(mapStateToProps, { filterApplied })(ImageCard);
+export default ImageCard;

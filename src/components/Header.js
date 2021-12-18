@@ -58,7 +58,11 @@ class Header extends React.Component {
               className={`item ${
                 path === this.props.currentPath ? "active" : ""
               }`}
-              onClick={() => this.props.changePath(path)}
+              onClick={() => {
+                if (window.location.pathname !== path) {
+                  this.props.changePath(path);
+                }
+              }}
             >
               {content}
             </Link>
@@ -123,10 +127,10 @@ class Header extends React.Component {
             #COZINHAS #PAVIMENTOS #JANELAS #PORTAS
           </div>
           <div className="ui large header header-white header-title">
-            Carpintária Manuel Prates e Filhos
+            Carpintaria Manuel Prates e Filhos
           </div>
           <div className="ui medium header header-white header-title-sub">
-            Serviços de Carpintária especializados.
+            Serviços de Carpintaria especializados.
           </div>
         </div>
         <div className="ui container masthead-menu" id="menuId">

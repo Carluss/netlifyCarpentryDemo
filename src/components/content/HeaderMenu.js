@@ -13,7 +13,9 @@ const HeaderMenu = (props) => {
     if (path === "/contactos") {
       scrollTo();
     } else {
-      props.changePath(path);
+      if (window.location.pathname !== path) {
+        props.changePath(path);
+      }
       props.handleOpenMenu();
     }
   };

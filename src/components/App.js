@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { changePath } from "../actions";
-import { Visibility } from "semantic-ui-react";
 
 import HeaderMenu from "./content/HeaderMenu";
 import Header from "./Header";
@@ -11,7 +10,7 @@ import Footer from "./Footer";
 import "semantic-ui-css/semantic.min.css";
 import "leaflet/dist/leaflet.css";
 
-import { IMAGESPROJECT, IMAGESPORTFOLIO } from "./util/Const";
+import { IMAGESPROJECT, IMAGESPORTFOLIO, MOBILE_WIDTH } from "./util/Const";
 
 import "./content/content.css";
 import "react-image-lightbox/style.css"; // This only needs to be imported once in your app
@@ -20,82 +19,91 @@ import Home from "./content/Home";
 import Portfolio from "./content/portfolio/Portfolio";
 import ProjectsPage from "./content/projectsPage/ProjectsPage";
 
-class App extends React.Component {
-  state = {
-    calculations: {
-      width: 0,
-      onScreen: false,
-      pixelsPassed: 0,
-    },
-    headerMenu: false,
-  };
+const App = (props) => {
+  const calculations = useWindowSize();
+  const [headerMenu, setHeaderMenu] = useState(false);
 
-  componentDidMount() {
+  useEffect(() => {
     console.log("https://github.com/Carluss/netlifyCarpentryDemo");
-    this.unlisten = history.listen((location, action) => {
+    const unlisten = history.listen((location, action) => {
       if (action === "POP") {
-        this.props.changePath(location.pathname);
+        props.changePath(location.pathname);
       }
     });
-  }
 
-  componentWillUnmount() {
-    this.unlisten();
-  }
+    return unlisten;
+  }, [props]);
 
-  handleUpdate = (e, { calculations }) => this.setState({ calculations });
-
-  handleOpenMenu = () => {
-    this.setState({ headerMenu: this.state.headerMenu ? false : true });
+  const handleOpenMenu = () => {
+    setHeaderMenu(headerMenu ? false : true);
   };
 
-  render() {
-    /*console.log(
-      "Width: ",
-      this.state.calculations.width,
-      "pixelsPassed: ",
-      this.state.calculations.pixelsPassed
-    );*/
-
-    return (
-      <div>
-        <Router history={history}>
-          <Visibility fireOnMount onUpdate={this.handleUpdate}>
-            <Header
-              width={this.state.calculations.width}
-              handleOpenMenu={this.handleOpenMenu}
-              isOpen={this.state.headerMenu}
-            />
-            <HeaderMenu
-              handleOpenMenu={this.handleOpenMenu}
-              open={this.state.headerMenu}
-            />
-            <Switch>
-              <Route path="/" exact>
-                <Home calculations={this.state.calculations} />
-              </Route>
-              <Route path="/portfolio" exact>
-                <Portfolio
-                  title="Porfólio"
-                  card={false}
-                  images={IMAGESPORTFOLIO}
-                />
-              </Route>
-              <Route path="/projetos" exact>
-                <ProjectsPage
-                  title="Projetos"
-                  card={true}
-                  images={IMAGESPROJECT}
-                />
-              </Route>
-              <Redirect to="/" />
-            </Switch>
-            <Footer />
-          </Visibility>
-        </Router>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Router history={history}>
+        <React.StrictMode>
+          <Header
+            width={calculations.width}
+            handleOpenMenu={handleOpenMenu}
+            isOpen={headerMenu}
+          />
+          {calculations.width <= MOBILE_WIDTH ? (
+            <HeaderMenu handleOpenMenu={handleOpenMenu} open={headerMenu} />
+          ) : null}
+          <Switch>
+            <Route path="/" exact>
+              <Home calculations={calculations} />
+            </Route>
+            <Route path="/portfolio" exact>
+              <Portfolio
+                title="Porfólio"
+                card={false}
+                images={IMAGESPORTFOLIO}
+              />
+            </Route>
+            <Route path="/projetos" exact>
+              <ProjectsPage
+                title="Projetos"
+                card={true}
+                images={IMAGESPROJECT}
+              />
+            </Route>
+            <Redirect to="/" />
+          </Switch>
+          <Footer />
+        </React.StrictMode>
+      </Router>
+    </div>
+  );
+};
 
 export default connect(null, { changePath })(App);
+
+function useWindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    // Handler to call on window resize
+    function handleResize() {
+      // Set window width/height to state
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []); // Empty array ensures that effect is only run on mount
+
+  return windowSize;
+}

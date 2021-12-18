@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { scrollContacts, mapVisible } from "../../actions";
+import { scrollContacts, mapVisible, servicosViewed } from "../../actions";
 
 import QuemSomos from "./QuemSomos";
-import ContactsPage from "./contactPage/ContactsPage";
 import Servicos from "./servico/Servicos";
 import RollImg from "./RollImg";
 import "./content.css";
+import ContactsPage from "./contactPage/ContactsPage";
 
 class Home extends React.Component {
   mapRef = React.createRef(0);
@@ -30,14 +30,6 @@ class Home extends React.Component {
       });
       this.props.scrollContacts();
     }
-
-    if (
-      this.mapRef.current.getBoundingClientRect().top + window.scrollY <=
-        1100 &&
-      this.props.mapIsVisible === false
-    ) {
-      this.props.mapVisible();
-    }
   }
 
   render() {
@@ -45,14 +37,15 @@ class Home extends React.Component {
       <React.Fragment>
         <Servicos
           width={this.props.calculations.width}
-          pixelsPassed={this.props.calculations.pixelsPassed}
+          servViewd={this.props.servViewd}
+          servicosViewed={this.props.servicosViewed}
         />
         <RollImg />
         <QuemSomos />
         <ContactsPage
           width={this.props.calculations.width}
-          innerRef={this.mapRef}
-          visible={this.props.mapIsVisible}
+          mapVisible={this.props.mapVisible}
+          isMapVisible={this.props.mapIsVisible}
         />
       </React.Fragment>
     );
@@ -67,4 +60,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { scrollContacts, mapVisible })(Home);
+export default connect(mapStateToProps, {
+  scrollContacts,
+  mapVisible,
+  servicosViewed,
+})(Home);
