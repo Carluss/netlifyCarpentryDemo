@@ -1,6 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { scrollContacts, mapVisible, servicosViewed } from "../../actions";
+import {
+  scrollContacts,
+  mapVisible,
+  servicosViewed,
+  changePath,
+  changePathFilter,
+} from "../../actions";
 
 import QuemSomos from "./QuemSomos";
 import Servicos from "./servico/Servicos";
@@ -40,7 +46,10 @@ class Home extends React.Component {
           servViewd={this.props.servViewd}
           servicosViewed={this.props.servicosViewed}
         />
-        <RollImg />
+        <RollImg
+          changePath={this.props.changePath}
+          changePathFilter={this.props.changePathFilter}
+        />
         <QuemSomos />
         <ContactsPage
           width={this.props.calculations.width}
@@ -64,4 +73,6 @@ export default connect(mapStateToProps, {
   scrollContacts,
   mapVisible,
   servicosViewed,
+  changePath,
+  changePathFilter,
 })(Home);

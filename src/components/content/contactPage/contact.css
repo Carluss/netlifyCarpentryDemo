@@ -3,3 +3,39 @@
   width: fit-content;
   margin: 2rem auto 1rem auto;
 }
+
+.map {
+  border-radius: 0px 25px 0px 25px;
+  min-height: 680px;
+  box-shadow: rgba(var(--primaryDarker1), 0.1) 0px 54px 55px,
+    rgba(var(--primaryDarker1), 0.1) 0px -12px 30px,
+    rgba(var(--primaryDarker1), 0.1) 0px 4px 6px,
+    rgba(var(--primaryDarker1), 0.1) 0px 12px 13px,
+    rgba(var(--primaryDarker1), 0.1) 0px -3px 5px;
+}
+
+.map-container {
+  margin: 50px auto 50px auto;
+  width: 85%;
+  position: relative;
+}
+@media only screen and (max-width: 768px) {
+  .list {
+    align-items: center;
+  }
+  .map {
+    min-height: 500px;
+  }
+  .map-container {
+    width: 100%;
+  }
+}
+.overlay-form {
+  position: absolute !important;
+  z-index: 401;
+  top: 0;
+  right: 15px;
+}
+.overlay-form .content {
+  width: fit-content !important;
+}

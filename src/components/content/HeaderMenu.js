@@ -30,39 +30,39 @@ const HeaderMenu = (props) => {
     props.handleOpenMenu();
   };
 
-  const renderMenuItems = () => {
-    return PATHS.map(({ path, content }) => {
-      if (path === "/contactos") {
-        return (
-          <Menu.Item key={path} onClick={() => onMenuClicked(path)}>
-            {content}
-          </Menu.Item>
-        );
-      } else {
-        return (
-          <Menu.Item
-            key={path}
-            as={Link}
-            to={path}
-            onClick={() => onMenuClicked(path)}
-          >
-            {content}
-          </Menu.Item>
-        );
-      }
-    });
-  };
-
   return (
     <AnimateHeight duration={500} height={props.open ? "auto" : 0}>
       <Transition visible={props.open} animation="slide left" duration={500}>
         <Menu vertical inverted compact widths={16}>
-          {renderMenuItems()}
+          <RenderMenuItems onMenuClicked={onMenuClicked} />
         </Menu>
       </Transition>
     </AnimateHeight>
   );
 };
+
+function RenderMenuItems({ onMenuClicked }) {
+  return PATHS.map(({ path, content }) => {
+    if (path === "/contactos") {
+      return (
+        <Menu.Item key={path} onClick={() => onMenuClicked(path)}>
+          {content}
+        </Menu.Item>
+      );
+    } else {
+      return (
+        <Menu.Item
+          key={path}
+          as={Link}
+          to={path}
+          onClick={() => onMenuClicked(path)}
+        >
+          {content}
+        </Menu.Item>
+      );
+    }
+  });
+}
 
 const mapStateToProps = (state) => {
   return { currentPath: state.path.path };

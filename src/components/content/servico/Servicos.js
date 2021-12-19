@@ -10,7 +10,13 @@ import {
 import Servico from "./Servico";
 import Titles from "../../util/Titles";
 import useOnScreen from "../../util/useOnScreen";
+import { ResponsiveImageThumbnail } from "../../util/ResponsiveImage";
 import "./servico.css";
+
+const image = {
+  webpimage: "/images/iqbal-anggawibawa-TWR8UHtxFFA-unsplash.webp",
+  image: "/images/iqbal-anggawibawa-TWR8UHtxFFA-unsplash.jpg",
+};
 
 const Servicoj = React.memo(
   (props) => {
@@ -24,40 +30,14 @@ const Servicoj = React.memo(
         props.width > 10 &&
         visible === false
       ) {
-        console.log("MOIBIL");
+        //console.log("PHONE");
         setVisible(true);
       } else if (isVisible && visible === false) {
         setVisible(true);
         props.servicosViewed();
-        console.log("PC");
+        //console.log("PC");
       }
     }, [props, visible, isVisible]);
-
-    const renderServicosAnimeted = () => {
-      var time = ANIMATION_TIME;
-      return SERVICOS.map((servico) => {
-        time = time + ANIMATION_TIME_PLUS;
-        return (
-          <Transition
-            key={servico.key}
-            visible={visible}
-            animation="fade right"
-            duration={time}
-            mountOnShow={false}
-          >
-            <div style={{ marginTop: "20px" }}>
-              <Servico
-                key={servico.key}
-                image={servico.image ? servico.image : null}
-                title={servico.title}
-                subTitle={servico.subTitle ? servico.subTitle : null}
-                content={servico.content}
-              ></Servico>
-            </div>
-          </Transition>
-        );
-      });
-    };
 
     return (
       <>
@@ -68,19 +48,20 @@ const Servicoj = React.memo(
         />
         <div
           ref={titleRef}
+          data-testid="titleRef"
           className="ui middle aligned stackable grid container"
         >
           <div className="row">
             <div className="nine wide centered column">
-              {renderServicosAnimeted()}
+              <RenderServicosAnimeted visible={visible} />
             </div>
 
             <div className="seven wide right floatedca column">
-              <img
-                className="ui bordered rounded image"
-                src="/images/iqbal-anggawibawa-TWR8UHtxFFA-unsplash.webp"
+              <ResponsiveImageThumbnail
+                classNameI="ui bordered rounded centered image"
                 alt="qwerty"
-              ></img>
+                image={image}
+              />
             </div>
           </div>
         </div>
@@ -94,5 +75,31 @@ const Servicoj = React.memo(
     return false;
   }
 );
+
+function RenderServicosAnimeted({ visible }) {
+  var time = ANIMATION_TIME;
+  return SERVICOS.map((servico) => {
+    time = time + ANIMATION_TIME_PLUS;
+    return (
+      <Transition
+        key={servico.key}
+        visible={visible}
+        animation="fade right"
+        duration={time}
+        mountOnShow={false}
+      >
+        <div style={{ marginTop: "20px" }}>
+          <Servico
+            key={servico.key}
+            image={servico.image ? servico.image : null}
+            title={servico.title}
+            subTitle={servico.subTitle ? servico.subTitle : null}
+            content={servico.content}
+          ></Servico>
+        </div>
+      </Transition>
+    );
+  });
+}
 
 export default Servicoj;

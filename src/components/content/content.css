@@ -1,6 +1,7 @@
 :root {
   --primary: #597aa4;
   --primaryDarker: #18314c;
+  --primaryDarker1: 24, 49, 76;
   --primaryDark: #3b587b;
   --primaryLight: #a6bddf;
   --complementary: #72562e;
@@ -152,47 +153,6 @@ html {
   padding: 0.2em 0em 3em 0em;
   margin: auto;
 }
-
-/*-----------Map--------------*/
-.map {
-  border-radius: 0px 25px 0px 25px;
-  min-height: 700px;
-  margin-bottom: 20px;
-  box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
-    rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
-}
-
-.map-container {
-  margin: 0 auto;
-  width: 85%;
-  position: relative;
-}
-@media only screen and (max-width: 768px) {
-  .list {
-    align-items: center;
-  }
-  .map {
-    min-height: 500px;
-  }
-  .map-container {
-    width: 100%;
-  }
-}
-.overlay-form {
-  position: absolute !important;
-  z-index: 401;
-  top: 0;
-  right: 15px;
-}
-.overlay-form .content {
-  width: fit-content !important;
-}
-/*    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);*/
-
 /*-----------------*/
 /*---roll-image----*/
 /*-----------------*/

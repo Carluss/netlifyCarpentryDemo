@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import Titles from "../../util/Titles";
 import "../content.css";
@@ -10,18 +10,23 @@ import useOnScreen from "../../util/useOnScreen";
 const Contacts = React.memo((props) => {
   const [mapRef, isVisible] = useOnScreen("300px", 0.6, props.isMapVisible);
 
-  if (isVisible && props.isMapVisible === false) {
-    setTimeout(function () {
+  useEffect(() => {
+    if (isVisible && props.isMapVisible === false) {
       props.mapVisible();
-    }, 50);
-  }
+    }
+  }, [props, isVisible]);
 
   return (
     <>
       <Titles order={false} title="CONTACTOS" subtitle="A NOSSA LOCALIZAÇÂO" />
       <div ref={props.innerRef} className="ui container">
         {props.width <= MOBILE_WIDTH ? <Info info={false} /> : null}
-        <div key="MAP" ref={mapRef} className="map-container">
+        <div
+          key="MAP"
+          ref={mapRef}
+          data-testid="mapItem"
+          className="map-container"
+        >
           {props.isMapVisible ? (
             <MapIframe width={props.width} />
           ) : (

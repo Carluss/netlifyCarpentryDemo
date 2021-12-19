@@ -15,9 +15,9 @@ const QuemSomos = () => {
             inceptos himenaeos. Sed imperdiet, augue mollis mollis hendrerit.
           </p>
         </div>
-        <div className="five wide right floated column">
+        <div className="five wide column">
           <img
-            className="ui large rounded image"
+            className="ui large rounded centered image"
             src="/images/logo.webp"
             alt="logo"
           />

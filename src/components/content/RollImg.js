@@ -1,10 +1,17 @@
 import React from "react";
-import { connect } from "react-redux";
-import { changePath, changePathFilter } from "../../actions";
 import { Link } from "react-router-dom";
+import { ResponsiveImageThumbnail } from "../util/ResponsiveImage";
 
 import "./content.css";
 
+const imageLeft = {
+  webpimage: "/images/roll/p1.webp",
+  image: "/images/roll/p1.jpg",
+};
+const imageRight = {
+  webpimage: "/images/roll/p2.webp",
+  image: "/images/roll/p2.jpg",
+};
 const RollImg = (props) => {
   return (
     <React.Fragment>
@@ -37,10 +44,10 @@ const RollImg = (props) => {
           <div className="row">
             <div className="eight wide column">
               <div className="roll-img-container">
-                <img
-                  className="ui rounded image roll-img"
-                  src="/images/roll/p1.webp"
+                <ResponsiveImageThumbnail
+                  classNameI="ui rounded image roll-img"
                   alt="qwerty"
+                  image={imageLeft}
                 />
               </div>
               <div className="roll-img-container roll-img-text">
@@ -70,10 +77,10 @@ const RollImg = (props) => {
             </div>
             <div className="eight wide right floated column">
               <div className="roll-img-container">
-                <img
-                  className="ui rounded image roll-img"
-                  src="/images/roll/p2.webp"
+                <ResponsiveImageThumbnail
+                  classNameI="ui rounded image roll-img"
                   alt="qwerty"
+                  image={imageRight}
                 />
               </div>
             </div>
@@ -83,4 +90,4 @@ const RollImg = (props) => {
     </React.Fragment>
   );
 };
-export default connect(null, { changePath, changePathFilter })(RollImg);
+export default RollImg;
