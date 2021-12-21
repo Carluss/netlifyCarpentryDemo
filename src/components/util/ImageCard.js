@@ -53,36 +53,6 @@ class ImageCard extends React.PureComponent {
     this.setState({ isOpen: false });
   };
 
-  renderCategorys(cat) {
-    return cat.split(" ").map((word, index) => {
-      const temp = word.charAt(0).toUpperCase() + word.slice(1);
-      if (index === cat.split(" ").length - 1) {
-        return (
-          <React.Fragment key={temp}>
-            <span
-              className="spanCat"
-              onClick={(e) => this.props.filterApplied(temp)}
-            >
-              {temp}
-            </span>
-          </React.Fragment>
-        );
-      } else {
-        return (
-          <React.Fragment key={temp}>
-            <span
-              className="spanCat"
-              onClick={(e) => this.props.filterApplied(temp)}
-            >
-              {temp}
-            </span>
-            {" / "}
-          </React.Fragment>
-        );
-      }
-    });
-  }
-
   handleIsOpen = (e) => {
     if (e !== undefined) {
       history.goBack();
@@ -154,7 +124,10 @@ class ImageCard extends React.PureComponent {
                   style={{ cursor: "pointer" }}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {this.renderCategorys(cat)}
+                  <RenderCategorys
+                    cat={cat}
+                    filterApplied={this.props.filterApplied}
+                  />
                 </div>
               ) : null}
             </div>
@@ -182,5 +155,29 @@ class ImageCard extends React.PureComponent {
     );
   }
 }
+
+const RenderCategorys = React.memo(({ cat, filterApplied }) => {
+  return cat.split(" ").map((word, index) => {
+    const temp = word.charAt(0).toUpperCase() + word.slice(1);
+    if (index === cat.split(" ").length - 1) {
+      return (
+        <React.Fragment key={temp}>
+          <span className="spanCat" onClick={(e) => filterApplied(temp)}>
+            {temp}
+          </span>
+        </React.Fragment>
+      );
+    } else {
+      return (
+        <React.Fragment key={temp}>
+          <span className="spanCat" onClick={(e) => filterApplied(temp)}>
+            {temp}
+          </span>
+          {" / "}
+        </React.Fragment>
+      );
+    }
+  });
+});
 
 export default ImageCard;

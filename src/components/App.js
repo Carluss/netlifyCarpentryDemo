@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { changePath } from "../actions";
+import { changePath, scrollContacts } from "../actions";
 
-import HeaderMenu from "./content/HeaderMenu";
+import MainHeaderMenu from "./MainHeaderMenu";
+import HeaderMobileMenu from "./content/HeaderMobileMenu";
 import Header from "./Header";
 import history from "../history";
 import Footer from "./Footer";
@@ -19,9 +20,17 @@ import Home from "./content/Home";
 import Portfolio from "./content/portfolio/Portfolio";
 import ProjectsPage from "./content/projectsPage/ProjectsPage";
 
-const App = (props) => {
+const App = React.memo((props) => {
   const calculations = useWindowSize();
   const [headerMenu, setHeaderMenu] = useState(false);
+
+  const scrollTo = useCallback(() => {
+    if (props.currentPath !== "/") {
+      props.changePath("/");
+      history.push("/");
+    }
+    props.scrollContacts();
+  }, [props]);
 
   useEffect(() => {
     console.log("https://github.com/Carluss/netlifyCarpentryDemo");
@@ -35,49 +44,50 @@ const App = (props) => {
   }, [props]);
 
   const handleOpenMenu = () => {
-    setHeaderMenu(headerMenu ? false : true);
+    setHeaderMenu(!headerMenu);
   };
 
   return (
     <div>
       <Router history={history}>
-        <React.StrictMode>
-          <Header
+        <div className="Mainheader">
+          <Header width={calculations.width} />
+          <MainHeaderMenu
             width={calculations.width}
             handleOpenMenu={handleOpenMenu}
+            currentPath={props.currentPath}
+            scrollContacts={props.scrollContacts}
             isOpen={headerMenu}
+            changePath={props.changePath}
+            scrollTo={scrollTo}
           />
-          {calculations.width <= MOBILE_WIDTH ? (
-            <HeaderMenu handleOpenMenu={handleOpenMenu} open={headerMenu} />
-          ) : null}
-          <Switch>
-            <Route path="/" exact>
-              <Home calculations={calculations} />
-            </Route>
-            <Route path="/portfolio" exact>
-              <Portfolio
-                title="Porfólio"
-                card={false}
-                images={IMAGESPORTFOLIO}
-              />
-            </Route>
-            <Route path="/projetos" exact>
-              <ProjectsPage
-                title="Projetos"
-                card={true}
-                images={IMAGESPROJECT}
-              />
-            </Route>
-            <Redirect to="/" />
-          </Switch>
-          <Footer />
-        </React.StrictMode>
+        </div>
+        {calculations.width <= MOBILE_WIDTH ? (
+          <HeaderMobileMenu handleOpenMenu={handleOpenMenu} open={headerMenu} />
+        ) : null}
+        <Switch>
+          <Route path="/" exact>
+            <Home calculations={calculations} />
+          </Route>
+          <Route path="/portfolio" exact>
+            <Portfolio title="Porfólio" card={false} images={IMAGESPORTFOLIO} />
+          </Route>
+          <Route path="/projetos" exact>
+            <ProjectsPage title="Projetos" card={true} images={IMAGESPROJECT} />
+          </Route>
+          <Redirect to="/" />
+        </Switch>
+        <Footer />
       </Router>
     </div>
   );
+});
+
+const mapStateToProps = (state) => {
+  return { currentPath: state.path.path };
 };
 
-export default connect(null, { changePath })(App);
+export default connect(mapStateToProps, { changePath, scrollContacts })(App);
 
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({

@@ -9,7 +9,7 @@ import {
 } from "../../util/Const";
 import Servico from "./Servico";
 import Titles from "../../util/Titles";
-import useOnScreen from "../../util/useOnScreen";
+import { useInView } from "react-intersection-observer";
 import { ResponsiveImageThumbnail } from "../../util/ResponsiveImage";
 import "./servico.css";
 
@@ -22,7 +22,11 @@ const Servicoj = React.memo(
   (props) => {
     const [visible, setVisible] = useState(props.servViewd);
 
-    const [titleRef, isVisible] = useOnScreen("-400px", 0.6, props.servViewd);
+    const { ref, inView } = useInView({
+      threshold: 0.5,
+      triggerOnce: true,
+      fallbackInView: true,
+    });
 
     useEffect(() => {
       if (
@@ -32,12 +36,12 @@ const Servicoj = React.memo(
       ) {
         //console.log("PHONE");
         setVisible(true);
-      } else if (isVisible && visible === false) {
+      } else if (inView && visible === false) {
         setVisible(true);
         props.servicosViewed();
         //console.log("PC");
       }
-    }, [props, visible, isVisible]);
+    }, [props, visible, inView]);
 
     return (
       <>
@@ -47,7 +51,7 @@ const Servicoj = React.memo(
           subtitle="O QUE FAZEMOS"
         />
         <div
-          ref={titleRef}
+          ref={ref}
           data-testid="titleRef"
           className="ui middle aligned stackable grid container"
         >

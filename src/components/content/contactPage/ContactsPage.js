@@ -5,16 +5,19 @@ import "../content.css";
 import MapIframe from "./MapIfram";
 import Info from "./Info";
 import { MOBILE_WIDTH } from "../../util/Const";
-import useOnScreen from "../../util/useOnScreen";
+import { useInView } from "react-intersection-observer";
 
 const Contacts = React.memo((props) => {
-  const [mapRef, isVisible] = useOnScreen("300px", 0.6, props.isMapVisible);
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    fallbackInView: true,
+  });
 
   useEffect(() => {
-    if (isVisible && props.isMapVisible === false) {
+    if (inView && props.isMapVisible === false) {
       props.mapVisible();
     }
-  }, [props, isVisible]);
+  }, [props, inView]);
 
   return (
     <>
@@ -23,7 +26,7 @@ const Contacts = React.memo((props) => {
         {props.width <= MOBILE_WIDTH ? <Info info={false} /> : null}
         <div
           key="MAP"
-          ref={mapRef}
+          ref={ref}
           data-testid="mapItem"
           className="map-container"
         >

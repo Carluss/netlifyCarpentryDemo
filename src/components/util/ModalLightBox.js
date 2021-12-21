@@ -1,55 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Lightbox from "react-image-lightbox";
 import history from "../../history";
 
-class ModalLightBox extends React.Component {
-  state = { photoIndex: 0 };
+const ModalLightBox = React.memo((props) => {
+  const { port, alt_description } = props.image;
+  const [photoIndex, setPhotoIndex] = useState(0);
 
-  componentWillUnmount() {
-    if (
-      (window.location.pathname === "/portfolio" ||
-        window.location.pathname === "/projetos") &&
-      window.location.hash === "#/"
-    ) {
-      this.props.handleIsOpen();
-      history.goBack();
-    }
-  }
+  useEffect(() => {
+    return () => {
+      if (
+        (window.location.pathname === "/portfolio" ||
+          window.location.pathname === "/projetos") &&
+        window.location.hash === "#/"
+      ) {
+        props.handleIsOpen();
+        history.goBack();
+      }
+    };
+  }, [props]);
 
-  render() {
-    const { port, alt_description } = this.props.image;
-
-    return (
-      <Lightbox
-        onClick={(event) => event.stopPropagation()}
-        mainSrc={port[this.state.photoIndex]}
-        nextSrc={
-          port[
-            this.state.photoIndex + 1 >= port.length
-              ? null
-              : this.state.photoIndex + 1
-          ]
-        }
-        prevSrc={
-          port[this.state.photoIndex - 1 < 0 ? null : this.state.photoIndex - 1]
-        }
-        onCloseRequest={() => {
-          this.props.handleIsOpen();
-        }}
-        imageTitle={alt_description[this.state.photoIndex]}
-        onMovePrevRequest={() =>
-          this.setState({
-            photoIndex: (this.state.photoIndex + port.length - 1) % port.length,
-          })
-        }
-        onMoveNextRequest={() =>
-          this.setState({
-            photoIndex: (this.state.photoIndex + 1) % port.length,
-          })
-        }
-      />
-    );
-  }
-}
+  return (
+    <Lightbox
+      onClick={(event) => event.stopPropagation()}
+      mainSrc={port[photoIndex]}
+      nextSrc={port[photoIndex + 1 >= port.length ? null : photoIndex + 1]}
+      prevSrc={port[photoIndex - 1 < 0 ? null : photoIndex - 1]}
+      onCloseRequest={() => props.handleIsOpen()}
+      imageTitle={alt_description[photoIndex]}
+      onMovePrevRequest={() =>
+        setPhotoIndex((photoIndex + port.length - 1) % port.length)
+      }
+      onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % port.length)}
+    />
+  );
+});
 
 export default ModalLightBox;

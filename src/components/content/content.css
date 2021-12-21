@@ -55,6 +55,9 @@ html {
   background: var(--primaryDarker) !important;
 }
 /*------------Header----------------*/
+.Mainheader {
+  position: relative;
+}
 .header-cs {
   width: 98vw;
   margin: 0 auto !important;

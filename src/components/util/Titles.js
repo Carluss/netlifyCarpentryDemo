@@ -1,8 +1,7 @@
 import React from "react";
 
-const Titles = (props) => {
+const Titles = React.memo((props) => {
   const { order, title, subtitle } = props;
-
   return (
     <>
       {order ? (
@@ -29,6 +28,6 @@ const Titles = (props) => {
       )}
     </>
   );
-};
+});
 
 export default Titles;

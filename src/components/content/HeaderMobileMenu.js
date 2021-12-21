@@ -8,7 +8,7 @@ import { Transition, Menu } from "semantic-ui-react";
 
 import { PATHS } from "../util/Const";
 
-const HeaderMenu = (props) => {
+const HeaderMobileMenu = (props) => {
   const onMenuClicked = (path) => {
     if (path === "/contactos") {
       scrollTo();
@@ -72,4 +72,4 @@ export default connect(mapStateToProps, {
   changePath,
   scrollContacts,
   servicosViewed,
-})(HeaderMenu);
+})(HeaderMobileMenu);
