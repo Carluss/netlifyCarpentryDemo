@@ -1,5 +1,13 @@
 import React, { lazy, Suspense } from "react";
-import { Transition, Dimmer, Loader } from "semantic-ui-react";
+import {
+  Transition,
+  Dimmer,
+  Loader,
+  Image,
+  Label,
+  Icon,
+  Card,
+} from "semantic-ui-react";
 import history from "../../history";
 
 import { ResponsiveImageThumbnail } from "./ResponsiveImage";
@@ -28,7 +36,6 @@ class ImageCard extends React.PureComponent {
       ) {
         this.handleIsOpen();
       }
-      // console.log("on route change loc", location, " acto.: ", action);
     });
   }
   componentWillUnmount() {
@@ -42,7 +49,7 @@ class ImageCard extends React.PureComponent {
     if (this.imageRef.current !== null) {
       const height = this.imageRef.current.clientHeight;
 
-      const spans = Math.ceil(height / 20) + 2;
+      const spans = Math.ceil(height / 15) + 2;
 
       //console.log(this.imageRef.current.clientHeight + "- " + spans);
       this.setState({ spans });
@@ -90,24 +97,23 @@ class ImageCard extends React.PureComponent {
         >
           <div
             className={`filter ${cat}`}
-            ref={this.props.innerRef}
             style={{
               gridRowEnd: `span ${this.state.spans}`,
               position: "relative",
             }}
           >
-            <div className="ui card">
+            <Card>
               <a
                 href="#/"
                 onClick={() => {
                   this.setState({ isOpen: true });
                 }}
               >
-                <div className="ui fluid image" style={{ cursor: "pointer" }}>
+                <Image fluid style={{ cursor: "pointer" }}>
                   {port.length > 1 ? (
-                    <div className="ui left corner label">
-                      <i className="images icon"></i>
-                    </div>
+                    <Label corner="left">
+                      <Icon name="images" />
+                    </Label>
                   ) : null}
                   <ResponsiveImageThumbnail
                     image={thumbnail}
@@ -116,11 +122,12 @@ class ImageCard extends React.PureComponent {
                     alt={alt_description}
                     classNameI="small image"
                   />
-                </div>
+                </Image>
               </a>
               {!this.props.card ? (
-                <div
-                  className="ui bottom left attached label spanCat-lable"
+                <Label
+                  attached="bottom left"
+                  className="spanCat-lable"
                   style={{ cursor: "pointer" }}
                   onClick={(e) => e.stopPropagation()}
                 >
@@ -128,9 +135,9 @@ class ImageCard extends React.PureComponent {
                     cat={cat}
                     filterApplied={this.props.filterApplied}
                   />
-                </div>
+                </Label>
               ) : null}
-            </div>
+            </Card>
           </div>
         </Transition>
 

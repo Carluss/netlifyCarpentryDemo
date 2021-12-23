@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Transition } from "semantic-ui-react";
+import { Transition, Container, Grid, Image } from "semantic-ui-react";
 
 import {
   ANIMATION_TIME,
@@ -50,25 +50,22 @@ const Servicoj = React.memo(
           title="OS NOSSOS SERVIÇOS"
           subtitle="O QUE FAZEMOS"
         />
-        <div
-          ref={ref}
-          data-testid="titleRef"
-          className="ui middle aligned stackable grid container"
-        >
-          <div className="row">
-            <div className="nine wide centered column">
-              <RenderServicosAnimeted visible={visible} />
-            </div>
 
-            <div className="seven wide right floatedca column">
-              <ResponsiveImageThumbnail
-                classNameI="ui bordered rounded centered image"
-                alt="qwerty"
-                image={image}
-              />
-            </div>
-          </div>
-        </div>
+        <Container>
+          <Grid stackable>
+            <Grid.Row>
+              <Grid.Column width={9} verticalAlign="middle">
+                <div ref={ref} data-testid="titleRef"></div>
+                <RenderServicosAnimeted visible={visible} />
+              </Grid.Column>
+              <Grid.Column width={7} floated="right">
+                <Image rounded bordered centered>
+                  <ResponsiveImageThumbnail alt="qwerty" image={image} />
+                </Image>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Container>
       </>
     );
   },

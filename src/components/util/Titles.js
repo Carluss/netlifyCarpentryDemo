@@ -1,30 +1,28 @@
 import React from "react";
+import { Container, Header } from "semantic-ui-react";
 
 const Titles = React.memo((props) => {
   const { order, title, subtitle } = props;
   return (
     <>
       {order ? (
-        <div className="ui middle center aligned container  serv-titles">
-          <h4 className="ui header serv-h4">
+        <Container textAlign="center" className="serv-titles">
+          <Header as="h4" className="serv-h4">
             <span>{subtitle}</span>
-          </h4>
-          <h2 className="ui header serv-h2">
+          </Header>
+          <Header as="h2" className="serv-h2">
             <span>{title}</span>
-          </h2>
-        </div>
+          </Header>
+        </Container>
       ) : (
-        <div
-          className="ui middle center aligned container  serv-titles"
-          id="contactss"
-        >
-          <h2 className="ui header serv-h2">
+        <Container textAlign="center" className="serv-titles" id="contactss">
+          <Header as="h2" className="serv-h2">
             <span>{title}</span>
-          </h2>
-          <h4 className="ui header serv-h4">
+          </Header>
+          <Header as="h4" className="serv-h4">
             <span>{subtitle}</span>
-          </h4>
-        </div>
+          </Header>
+        </Container>
       )}
     </>
   );

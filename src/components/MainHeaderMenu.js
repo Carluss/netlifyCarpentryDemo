@@ -1,48 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import history from "../history";
-import { MOBILE_WIDTH, PATHS } from "./util/Const";
+import { PATHS } from "./util/Const";
+import { Container, Menu } from "semantic-ui-react";
 
-const MainHeaderMenu = (props) => {
-  const {
-    width,
-    handleOpenMenu,
-    currentPath,
-    scrollContacts,
-    isOpen,
-    changePath,
-  } = props;
+const MainHeaderMenu = React.memo((props) => {
+  const { currentPath, scrollContacts, changePath } = props;
   return (
-    <div className="ui container masthead-menu" id="menuId">
-      <div className="ui big tabular menu header-menu ">
-        {width > MOBILE_WIDTH ? (
-          <RenderMenu
-            paths={PATHS}
-            handleOpenMenu={handleOpenMenu}
-            currentPath={currentPath}
-            scrollContacts={scrollContacts}
-            isOpen={isOpen}
-            changePath={changePath}
-          />
-        ) : (
-          <div className="right menu">
-            <button
-              className={`item ${isOpen ? "inverted" : ""} active`}
-              onClick={() => handleOpenMenu()}
-            >
-              <i
-                className={`${
-                  isOpen ? "inverted down angle" : "up angle"
-                } icon`}
-                style={{ margin: "0" }}
-              ></i>
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
+    <Container className="masthead-menu" id="menuId">
+      <Menu size="huge" tabular className="header-menu">
+        <RenderMenu
+          paths={PATHS}
+          currentPath={currentPath}
+          scrollContacts={scrollContacts}
+          changePath={changePath}
+        />
+      </Menu>
+    </Container>
   );
-};
+});
 
 export default MainHeaderMenu;
 
@@ -58,25 +34,17 @@ function RenderMenu(props) {
     switch (path) {
       case "/contactos":
         return (
-          <div key={path} className="right menu">
-            <button
-              key={path}
-              style={{ cursor: "pointer" }}
-              className={`item ${
-                path === props.currentPath ? "active" : ""
-              } hidden`}
-              onClick={() => scrollTo()}
-            >
-              {content}
-            </button>
-          </div>
+          <Menu.Menu key={path} position="right">
+            <Menu.Item onClick={() => scrollTo()}>{content}</Menu.Item>
+          </Menu.Menu>
         );
       default:
         return (
-          <Link
+          <Menu.Item
             key={path}
+            as={Link}
             to={path}
-            className={`item ${path === props.currentPath ? "active" : ""}`}
+            active={path === props.currentPath}
             onClick={() => {
               if (window.location.pathname !== path) {
                 props.changePath(path);
@@ -84,7 +52,7 @@ function RenderMenu(props) {
             }}
           >
             {content}
-          </Link>
+          </Menu.Item>
         );
     }
   });

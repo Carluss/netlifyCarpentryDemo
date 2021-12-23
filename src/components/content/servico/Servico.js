@@ -1,34 +1,26 @@
 import React from "react";
+import { Header } from "semantic-ui-react";
 
 import "./servico.css";
 
-class Servico extends React.Component {
-  state = {
-    calculations: {
-      topVisible: false,
-    },
-    visible: false,
-  };
-  render() {
-    return (
-      <>
-        <h2 className="ui header serv-headers">
-          {this.props.image ? <i className={this.props.image} /> : null}
+const Servico = React.memo((props) => {
+  return (
+    <>
+      <Header as="h2" className="serv-headers">
+        {props.image ? <i className={props.image} /> : null}
 
-          {this.props.subTitle ? (
-            <div className="content">
-              {this.props.title}
-              <div className="sub header">{this.props.subTitle}</div>
-            </div>
-          ) : (
-            <>{this.props.title}</>
-          )}
-        </h2>
-
-        <p className="serv-p">{this.props.content}</p>
-      </>
-    );
-  }
-}
+        {props.subTitle ? (
+          <Header.Content>
+            {props.title}
+            <Header.Subheader>{props.subTitle}</Header.Subheader>
+          </Header.Content>
+        ) : (
+          <>{props.title}</>
+        )}
+      </Header>
+      <p className="serv-p">{props.content}</p>
+    </>
+  );
+});
 
 export default Servico;

@@ -8,7 +8,7 @@ export const MAP_CENTER = [38.707605, -7.895791];
 export const POINT_INTEREST = [38.707132, -7.898247];
 
 export const SAPO_EMAIL = "mpfilhos@sapo.pt";
-export const GMAIL = "mpfilhos@gmail.com";
+export const GMAIL = "mpratesefilhos@gmail.com";
 export const MORADA = "Rua dos Palheiros nº1A 7040-230, Igrejinha";
 export const PHONE = 266477105;
 

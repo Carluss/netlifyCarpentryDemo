@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { filterApplied } from "../../../actions";
+import { Container } from "semantic-ui-react";
 
 import "./portfolio.css";
 import Titles from "../../util/Titles";
@@ -23,11 +24,11 @@ const Portfolio = (props) => {
   }
 
   return (
-    <div className="ui container">
+    <Container>
       <Titles title={props.title} />
       <Pbuttons filter={props.filter} filterApplied={props.filterApplied} />
       <div className=" image-list">{renderedImageList()}</div>
-    </div>
+    </Container>
   );
 };
 

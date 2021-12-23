@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
   scrollContacts,
@@ -14,10 +14,9 @@ import RollImg from "./RollImg";
 import "./content.css";
 import ContactsPage from "./contactPage/ContactsPage";
 
-class Home extends React.Component {
-  mapRef = React.createRef(0);
-  componentDidMount() {
-    if (this.props.scrollEvent) {
+const Home = (props) => {
+  useEffect(() => {
+    if (props.scrollEvent) {
       setTimeout(function () {
         document.getElementById("contactss").scrollIntoView({
           behavior: "smooth",
@@ -25,41 +24,30 @@ class Home extends React.Component {
         });
       }, 200);
 
-      this.props.scrollContacts();
+      props.scrollContacts();
     }
-  }
-  componentDidUpdate() {
-    if (this.props.scrollEvent) {
-      document.getElementById("contactss").scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-      this.props.scrollContacts();
-    }
-  }
+  }, [props]);
 
-  render() {
-    return (
-      <React.Fragment>
-        <Servicos
-          width={this.props.calculations.width}
-          servViewd={this.props.servViewd}
-          servicosViewed={this.props.servicosViewed}
-        />
-        <RollImg
-          changePath={this.props.changePath}
-          changePathFilter={this.props.changePathFilter}
-        />
-        <QuemSomos />
-        <ContactsPage
-          width={this.props.calculations.width}
-          mapVisible={this.props.mapVisible}
-          isMapVisible={this.props.mapIsVisible}
-        />
-      </React.Fragment>
-    );
-  }
-}
+  return (
+    <React.Fragment>
+      <Servicos
+        width={props.calculations.width}
+        servViewd={props.servViewd}
+        servicosViewed={props.servicosViewed}
+      />
+      <RollImg
+        changePath={props.changePath}
+        changePathFilter={props.changePathFilter}
+      />
+      <QuemSomos />
+      <ContactsPage
+        width={props.calculations.width}
+        mapVisible={props.mapVisible}
+        isMapVisible={props.mapIsVisible}
+      />
+    </React.Fragment>
+  );
+};
 
 const mapStateToProps = (state) => {
   return {

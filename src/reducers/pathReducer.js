@@ -1,11 +1,21 @@
-import { PORTFOLIO_BUTTONS_CAT } from "../components/util/Const";
+import { PORTFOLIO_BUTTONS_CAT, PATHS } from "../components/util/Const";
 
+//If current window.location.pathname is a valid path INITIAL_STATE.path = current window.location.pathname else   === "/"
+function InitialPath() {
+  const temp = PATHS.find((p) => {
+    return window.location.pathname === p.path;
+  });
+  if (temp) {
+    return window.location.pathname;
+  }
+  return "/";
+}
 const INITIAL_STATE = {
-  path: window.location.pathname,
+  path: InitialPath(),
   filter: PORTFOLIO_BUTTONS_CAT[0].text,
   scrollContacts: false,
   mapVisible: false,
-  servicos_viewed: window.location.pathname === "/portfolio" ? true : false,
+  servicos_viewed: window.location.pathname !== "/" ? true : false,
 };
 
 const pathReducer = (state = INITIAL_STATE, action) => {

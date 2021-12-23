@@ -1,11 +1,11 @@
 import React from "react";
-import { Icon, Menu } from "semantic-ui-react";
+import { Icon, Menu, Container, Header } from "semantic-ui-react";
 
 const headerLargeSrc = `/images/cetteup-IC5sX-7PRN8-unsplash-large.webp`;
 const headerNormalSrc = `/images/cetteup-IC5sX-7PRN8-unsplash.webp`;
 const headerMobileSrc = `/images/cetteup-IC5sX-7PRN8-unsplash-mobile.webp`;
 
-const Header = React.memo(() => {
+const MainHeader = React.memo(() => {
   function handleItemClick() {
     console.log("this");
   }
@@ -28,19 +28,19 @@ const Header = React.memo(() => {
           <Menu.Item name="EN" onClick={handleItemClick} />
         </Menu.Menu>
       </Menu>
-      <div className="ui container masthead-container">
-        <div className="ui tiny header header-white header-top">
+      <Container className="masthead-container">
+        <Header size="tiny" className="header-white header-top">
           #COZINHAS #PAVIMENTOS #JANELAS #PORTAS
-        </div>
-        <div className="ui large header header-white header-title">
+        </Header>
+        <Header size="large" className=" header-white header-title">
           Carpintaria Manuel Prates e Filhos
-        </div>
-        <div className="ui medium header header-white header-title-sub">
+        </Header>
+        <Header size="medium" className="header-white header-title-sub">
           Serviços de Carpintaria especializados.
-        </div>
-      </div>
+        </Header>
+      </Container>
     </div>
   );
 });
 
-export default Header;
+export default MainHeader;

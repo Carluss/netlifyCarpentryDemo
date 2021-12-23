@@ -1,78 +1,89 @@
 import React from "react";
-import { Grid, Segment } from "semantic-ui-react";
+import {
+  Grid,
+  Segment,
+  Container,
+  Header,
+  List,
+  Item,
+  Icon,
+} from "semantic-ui-react";
 
 import { SAPO_EMAIL, GMAIL, MORADA, PHONE } from "./util/Const";
 import "./content/content.css";
 
 const Footer = React.memo(() => {
   return (
-    <div className="ui inverted vertical segment footer-segment">
-      <div className="ui container">
+    <Segment inverted vertical className="footer-segment">
+      <Container>
         <Grid centered>
           <Grid.Row columns={2}>
             <Grid.Column width={5}>
-              <h4 className="ui header" style={{ color: "white" }}>
+              <Header as="h4" style={{ color: "white" }}>
                 Atendimento
-              </h4>
-              <div className="ui medium list">
-                <div className="item">
-                  <div className="content">Segunda à Sexta</div>
-                </div>
-                <div className="item">
-                  <div className="content">08:00-17:00</div>
-                </div>
-              </div>
+              </Header>
+              <List size="medium">
+                <Item>
+                  <Item.Content>Segunda à Sexta</Item.Content>
+                </Item>
+                <Item>
+                  <Item.Content>08:00-17:00</Item.Content>
+                </Item>
+              </List>
             </Grid.Column>
             <Grid.Column width={8}>
-              <h4 className="ui header" style={{ color: "white" }}>
+              <Header as="h4" style={{ color: "white" }}>
                 Contactos
-              </h4>
-              <div className="ui medium list">
-                <div className="item">
-                  <i className="phone icon"></i>
-                  <div className="content">
-                    <a href={`tel:+351${PHONE}`}>{PHONE}</a>
-                  </div>
-                </div>
-                <div className="item">
-                  <i className="map icon"></i>
-                  <div className="content">{MORADA}</div>
-                </div>
-                <div className="item">
-                  <i className="mail icon"></i>
-                  <div className="content">
-                    <a href={`mailto:${GMAIL}`}>{GMAIL}</a>
-                  </div>
-                </div>
-                <div className="item">
-                  <i className="mail icon"></i>
-                  <div className="content">
-                    <a href={`mailto:${SAPO_EMAIL}`}>{SAPO_EMAIL}</a>
-                  </div>
-                </div>
-                <div className="item">
-                  <i className="facebook large icon">acebook</i>
-                </div>
-              </div>
+              </Header>
+              <List>
+                <Item>
+                  <Icon name="phone" />
+                  <Item.Content as="a" href={`tel:+351${PHONE}`}>
+                    {PHONE}
+                  </Item.Content>
+                </Item>
+                <Item>
+                  <Icon name="map" />
+                  <Item.Content>{MORADA}</Item.Content>
+                </Item>
+                <Item>
+                  <Icon name="mail" />
+                  <Item.Content as="a" href={`mailto:${SAPO_EMAIL}`}>
+                    {SAPO_EMAIL}
+                  </Item.Content>
+                </Item>
+                <Item>
+                  <Icon name="mail" />
+                  <Item.Content as="a" href={`mailto:${GMAIL}`}>
+                    {GMAIL}
+                  </Item.Content>
+                </Item>
+                <Item>
+                  <Icon name="facebook" />
+                  <Item.Content as="a" href="#">
+                    Facebook
+                  </Item.Content>
+                </Item>
+              </List>
             </Grid.Column>
           </Grid.Row>
         </Grid>
-      </div>
+      </Container>
       <Grid centered>
         <Grid.Row columns={1}>
           <Grid.Column>
             <Segment className="footer-boxD">
-              <div className="ui container">
+              <Container>
                 <p>
-                  <i className="copyright outline icon"></i> Carpintaria Manuel
-                  Prates e filhos
+                  <Icon name="copyright outline" />
+                  Carpintaria Manuel Prates e filhos
                 </p>
-              </div>
+              </Container>
             </Segment>
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    </div>
+    </Segment>
   );
 });
 

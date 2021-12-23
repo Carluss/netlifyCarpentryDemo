@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Container, Segment } from "semantic-ui-react";
 
 import Titles from "../../util/Titles";
 import "../content.css";
@@ -22,7 +23,8 @@ const Contacts = React.memo((props) => {
   return (
     <>
       <Titles order={false} title="CONTACTOS" subtitle="A NOSSA LOCALIZAÇÂO" />
-      <div ref={props.innerRef} className="ui container">
+      <div ref={props.innerRef}></div>
+      <Container>
         {props.width <= MOBILE_WIDTH ? <Info info={false} /> : null}
         <div
           key="MAP"
@@ -35,14 +37,13 @@ const Contacts = React.memo((props) => {
           ) : (
             <div className="map"></div>
           )}
-
           {props.width > MOBILE_WIDTH ? (
-            <div className="ui segment overlay-form">
+            <Segment className="overlay-form">
               <Info info={true} />
-            </div>
+            </Segment>
           ) : null}
         </div>
-      </div>
+      </Container>
     </>
   );
 });

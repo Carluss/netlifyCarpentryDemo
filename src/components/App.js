@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { changePath, scrollContacts } from "../actions";
+import { Container, Menu, Icon } from "semantic-ui-react";
 
 import MainHeaderMenu from "./MainHeaderMenu";
 import HeaderMobileMenu from "./content/HeaderMobileMenu";
-import Header from "./Header";
+import MainHeader from "./Header";
 import history from "../history";
 import Footer from "./Footer";
 import "semantic-ui-css/semantic.min.css";
@@ -24,16 +25,10 @@ const App = React.memo((props) => {
   const calculations = useWindowSize();
   const [headerMenu, setHeaderMenu] = useState(false);
 
-  const scrollTo = useCallback(() => {
-    if (props.currentPath !== "/") {
-      props.changePath("/");
-      history.push("/");
-    }
-    props.scrollContacts();
-  }, [props]);
-
   useEffect(() => {
     console.log("https://github.com/Carluss/netlifyCarpentryDemo");
+  }, []);
+  useEffect(() => {
     const unlisten = history.listen((location, action) => {
       if (action === "POP") {
         props.changePath(location.pathname);
@@ -51,16 +46,16 @@ const App = React.memo((props) => {
     <div>
       <Router history={history}>
         <div className="Mainheader">
-          <Header width={calculations.width} />
-          <MainHeaderMenu
-            width={calculations.width}
-            handleOpenMenu={handleOpenMenu}
-            currentPath={props.currentPath}
-            scrollContacts={props.scrollContacts}
-            isOpen={headerMenu}
-            changePath={props.changePath}
-            scrollTo={scrollTo}
-          />
+          <MainHeader width={calculations.width} />
+          {calculations.width > MOBILE_WIDTH ? (
+            <MainHeaderMenu
+              currentPath={props.currentPath}
+              scrollContacts={props.scrollContacts}
+              changePath={props.changePath}
+            />
+          ) : (
+            <MobileMenu isOpen={headerMenu} handleOpenMenu={handleOpenMenu} />
+          )}
         </div>
         {calculations.width <= MOBILE_WIDTH ? (
           <HeaderMobileMenu handleOpenMenu={handleOpenMenu} open={headerMenu} />
@@ -116,4 +111,27 @@ function useWindowSize() {
   }, []); // Empty array ensures that effect is only run on mount
 
   return windowSize;
+}
+
+function MobileMenu(props) {
+  const { isOpen, handleOpenMenu } = props;
+  return (
+    <Container className="masthead-menu" id="menuId">
+      <Menu tabular className="header-menu">
+        <Menu.Menu position="right">
+          <Menu.Item
+            active
+            onClick={() => handleOpenMenu()}
+            className={`${isOpen ? "inverted" : ""}`}
+          >
+            <Icon
+              className={`${isOpen ? "inverted" : ""}`}
+              name={isOpen ? "down angle" : "up angle"}
+              style={{ margin: "0" }}
+            />
+          </Menu.Item>
+        </Menu.Menu>
+      </Menu>
+    </Container>
+  );
 }
