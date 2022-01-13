@@ -4,18 +4,24 @@ import { connect } from "react-redux";
 import { changePath, scrollContacts } from "../actions";
 import { Container, Menu, Icon } from "semantic-ui-react";
 
+/*--CSS imports--*/
+import "./content/content.css";
+import "./content/contactPage/contact.css";
+import "./content/portfolio/portfolio.css";
+import "./content/servico/servico.css";
+
+import "react-image-lightbox/style.css";
+import "semantic-ui-css/semantic.min.css";
+import "leaflet/dist/leaflet.css";
+/*--------------*/
+
 import MainHeaderMenu from "./MainHeaderMenu";
 import HeaderMobileMenu from "./content/HeaderMobileMenu";
 import MainHeader from "./Header";
 import history from "../history";
 import Footer from "./Footer";
-import "semantic-ui-css/semantic.min.css";
-import "leaflet/dist/leaflet.css";
 
 import { IMAGESPROJECT, IMAGESPORTFOLIO, MOBILE_WIDTH } from "./util/Const";
-
-import "./content/content.css";
-import "react-image-lightbox/style.css"; // This only needs to be imported once in your app
 
 import Home from "./content/Home";
 import Portfolio from "./content/portfolio/Portfolio";

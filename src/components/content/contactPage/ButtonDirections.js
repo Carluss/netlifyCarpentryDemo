@@ -1,5 +1,4 @@
 import { Button, Icon } from "semantic-ui-react";
-import "./contact.css";
 
 const ButtonDirections = () => {
   return (

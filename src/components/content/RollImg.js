@@ -11,8 +11,6 @@ import {
   Image,
 } from "semantic-ui-react";
 
-import "./content.css";
-
 const imageLeft = {
   webpimage: "/images/roll/p1.webp",
   image: "/images/roll/p1.jpg",

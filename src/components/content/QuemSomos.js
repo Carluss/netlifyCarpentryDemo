@@ -1,6 +1,5 @@
 import React from "react";
 import { Header, Container, Grid, Image, GridColumn } from "semantic-ui-react";
-import "./content.css";
 
 const QuemSomos = () => {
   return (

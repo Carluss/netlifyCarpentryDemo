@@ -33,6 +33,12 @@ export const SERVICOS = [
     content:
       "Ipsum, non commodo nibh dui at dolor. Praesentelementum augue nonarcu aliquet, id convallis mi dignissim. Crassollicitudin doloreros, quis aliquet lectus tristique in.",
   },
+  {
+    key: "4",
+    title: "Outros serviços.",
+    content:
+      "Ipsum, non commodo nibh dui at dolor. Praesentelementum augue nonarcu aliquet, id convallis mi dignissim. Crassollicitudin doloreros, quis aliquet lectus tristique in.",
+  },
 ];
 
 export const PATHS = [

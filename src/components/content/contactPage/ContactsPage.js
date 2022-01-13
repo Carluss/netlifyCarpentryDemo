@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Container, Segment } from "semantic-ui-react";
 
 import Titles from "../../util/Titles";
-import "../content.css";
 import MapIframe from "./MapIfram";
 import Info from "./Info";
 import { MOBILE_WIDTH } from "../../util/Const";

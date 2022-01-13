@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { filterApplied } from "../../../actions";
 import { Container } from "semantic-ui-react";
 
-import "./portfolio.css";
 import Titles from "../../util/Titles";
 import ImageCard from "../../util/ImageCard";
 import Pbuttons from "./Pbuttons";

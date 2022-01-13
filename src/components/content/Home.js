@@ -11,7 +11,6 @@ import {
 import QuemSomos from "./QuemSomos";
 import Servicos from "./servico/Servicos";
 import RollImg from "./RollImg";
-import "./content.css";
 import ContactsPage from "./contactPage/ContactsPage";
 
 const Home = (props) => {

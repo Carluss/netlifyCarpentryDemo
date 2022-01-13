@@ -11,7 +11,6 @@ import Servico from "./Servico";
 import Titles from "../../util/Titles";
 import { useInView } from "react-intersection-observer";
 import { ResponsiveImageThumbnail } from "../../util/ResponsiveImage";
-import "./servico.css";
 
 const image = {
   webpimage: "/images/iqbal-anggawibawa-TWR8UHtxFFA-unsplash.webp",

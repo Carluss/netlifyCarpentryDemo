@@ -10,7 +10,6 @@ import {
 } from "semantic-ui-react";
 
 import { SAPO_EMAIL, GMAIL, MORADA, PHONE } from "./util/Const";
-import "./content/content.css";
 
 const Footer = React.memo(() => {
   return (

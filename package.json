@@ -11,6 +11,7 @@
     "@types/react-transition-group": "^4.4.4",
     "axios": "^0.24.0",
     "final-form": "^4.20.4",
+    "fomantic-ui-css": "^2.8.8",
     "google-maps-react": "^2.0.6",
     "jquery": "^3.6.0",
     "leaflet": "^1.7.1",
