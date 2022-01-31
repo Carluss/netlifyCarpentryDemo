@@ -1,17 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 import { Icon, Menu, Container, Header } from "semantic-ui-react";
+import { MOBILE_WIDTH } from "./util/Const";
 
 const headerLargeSrc = `/images/cetteup-IC5sX-7PRN8-unsplash-large.webp`;
 const headerNormalSrc = `/images/cetteup-IC5sX-7PRN8-unsplash.webp`;
 const headerMobileSrc = `/images/cetteup-IC5sX-7PRN8-unsplash-mobile.webp`;
 
-const MainHeader = React.memo(() => {
+const MainHeader = React.memo((props) => {
   function handleItemClick() {
     console.log("this");
   }
 
+  const { ref, inView } = useInView({
+    threshold: 0.9,
+    fallbackInView: true,
+  });
+
+  useEffect(() => {
+    if (!inView && document.getElementById("scrollD")) {
+      document.getElementById("scrollD").classList.remove("scrollDvisible");
+      document.getElementById("scrollD").classList.add("scrollDhidden");
+    } else if (document.getElementById("scrollD")) {
+      document.getElementById("scrollD").classList.remove("scrollDhidden");
+      document.getElementById("scrollD").classList.add("scrollDvisible");
+    }
+  }, [inView]);
+
   return (
-    <div className="masthead header-white">
+    <div className="masthead header-white" ref={ref}>
       <Menu color="brown" secondary size="huge" className="header-cs">
         <img
           className="pseudo-background-img"
@@ -39,6 +56,20 @@ const MainHeader = React.memo(() => {
           Serviços de Carpintaria especializados.
         </Header>
       </Container>
+      {props.width > MOBILE_WIDTH ? (
+        <div id="scrollD" className="scrollD" style={{ cursor: "pointer" }}>
+          <Icon
+            onClick={() => {
+              document.getElementById("menuId").scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }}
+            name="angle double down"
+            size="huge"
+          />
+        </div>
+      ) : null}
     </div>
   );
 });

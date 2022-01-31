@@ -22,7 +22,7 @@ const Servicoj = React.memo(
     const [visible, setVisible] = useState(props.servViewd);
 
     const { ref, inView } = useInView({
-      threshold: 0.7,
+      threshold: 0.5,
       triggerOnce: true,
       fallbackInView: true,
     });

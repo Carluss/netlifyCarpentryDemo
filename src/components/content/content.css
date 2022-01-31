@@ -60,7 +60,6 @@ html {
   position: relative;
 }
 .header-cs {
-  width: 98vw;
   margin: 0 auto !important;
 }
 .pseudo-background-img {
@@ -72,6 +71,52 @@ html {
   object-fit: cover;
   z-index: -1;
 }
+
+.scrollD {
+  width: fit-content;
+
+  padding: 0.75em 1em;
+  margin: 0;
+  position: absolute;
+  bottom: 7%;
+  left: 50%;
+}
+.scrollD .icon {
+  position: relative;
+  left: -50%;
+  -webkit-animation: mover 1s infinite alternate;
+  animation: mover 1s infinite alternate;
+}
+@-webkit-keyframes mover {
+  0% {
+    opacity: 0.7;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateY(-4px);
+  }
+}
+@keyframes mover {
+  0% {
+    opacity: 0.7;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateY(-4px);
+  }
+}
+.scrollDvisible {
+  visibility: visible;
+  transition: opacity 0.5s linear;
+}
+.scrollDhidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.5s, opacity 0.5s linear;
+}
+
 /*-remove header shadow-*/
 .ui.tabular.menu {
   border: 0px !important;
@@ -83,8 +128,7 @@ html {
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
-  height: 80vh;
-  width: 100vw;
+  height: 100vh;
 }
 .masthead-container {
   color: white !important;
