@@ -1,6 +1,6 @@
 export const MOBILE_WIDTH = 768;
 
-export const ANIMATION_TIME = 600;
+export const ANIMATION_TIME = 400;
 export const ANIMATION_TIME_PLUS = 400;
 
 export const MAP_ZOOM = 15;

@@ -55,6 +55,7 @@ html {
   background: var(--primaryDarker) !important;
 }
 /*------------Header----------------*/
+
 .Mainheader {
   position: relative;
 }
@@ -82,7 +83,7 @@ html {
   position: relative;
   background-position: center;
   background-repeat: no-repeat;
-  height: 800px;
+  height: 80vh;
   width: 100vw;
 }
 .masthead-container {

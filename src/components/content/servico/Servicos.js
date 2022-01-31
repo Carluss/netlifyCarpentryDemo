@@ -22,7 +22,7 @@ const Servicoj = React.memo(
     const [visible, setVisible] = useState(props.servViewd);
 
     const { ref, inView } = useInView({
-      threshold: 0.5,
+      threshold: 0.7,
       triggerOnce: true,
       fallbackInView: true,
     });
@@ -38,12 +38,14 @@ const Servicoj = React.memo(
       } else if (inView && visible === false) {
         setVisible(true);
         props.servicosViewed();
+        console.log("trigger");
+
         //console.log("PC");
       }
     }, [props, visible, inView]);
 
     return (
-      <>
+      <div style={{ minHeight: "500px" }} ref={ref} data-testid="titleRef">
         <Titles
           order={true}
           title="OS NOSSOS SERVIÇOS"
@@ -54,7 +56,6 @@ const Servicoj = React.memo(
           <Grid stackable>
             <Grid.Row>
               <Grid.Column width={9} verticalAlign="middle">
-                <div ref={ref} data-testid="titleRef"></div>
                 <RenderServicosAnimeted visible={visible} />
               </Grid.Column>
               <Grid.Column width={7} floated="right">
@@ -65,7 +66,7 @@ const Servicoj = React.memo(
             </Grid.Row>
           </Grid>
         </Container>
-      </>
+      </div>
     );
   },
   (nextProps) => {
