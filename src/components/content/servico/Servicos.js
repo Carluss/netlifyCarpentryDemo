@@ -38,14 +38,12 @@ const Servicoj = React.memo(
       } else if (inView && visible === false) {
         setVisible(true);
         props.servicosViewed();
-        console.log("trigger");
-
         //console.log("PC");
       }
     }, [props, visible, inView]);
 
     return (
-      <div style={{ minHeight: "500px" }} ref={ref} data-testid="titleRef">
+      <div ref={ref} data-testid="titleRef">
         <Titles
           order={true}
           title="OS NOSSOS SERVIÇOS"

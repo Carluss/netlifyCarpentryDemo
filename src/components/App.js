@@ -27,6 +27,10 @@ import Home from "./content/Home";
 import Portfolio from "./content/portfolio/Portfolio";
 import ProjectsPage from "./content/projectsPage/ProjectsPage";
 
+const headerLargeSrc = `/images/cetteup-IC5sX-7PRN8-unsplash-large.webp`;
+const headerNormalSrc = `/images/cetteup-IC5sX-7PRN8-unsplash.webp`;
+const headerMobileSrc = `/images/cetteup-IC5sX-7PRN8-unsplash-mobile.webp`;
+
 const App = React.memo((props) => {
   const calculations = useWindowSize();
   const [headerMenu, setHeaderMenu] = useState(false);
@@ -49,38 +53,42 @@ const App = React.memo((props) => {
   };
 
   return (
-    <div>
-      <Router history={history}>
-        <div className="Mainheader">
-          <MainHeader width={calculations.width} />
-          {calculations.width > MOBILE_WIDTH ? (
-            <MainHeaderMenu
-              currentPath={props.currentPath}
-              scrollContacts={props.scrollContacts}
-              changePath={props.changePath}
-            />
-          ) : (
-            <MobileMenu isOpen={headerMenu} handleOpenMenu={handleOpenMenu} />
-          )}
-        </div>
-        {calculations.width <= MOBILE_WIDTH ? (
-          <HeaderMobileMenu handleOpenMenu={handleOpenMenu} open={headerMenu} />
-        ) : null}
-        <Switch>
-          <Route path="/" exact>
-            <Home calculations={calculations} />
-          </Route>
-          <Route path="/portfolio" exact>
-            <Portfolio title="Porfólio" card={false} images={IMAGESPORTFOLIO} />
-          </Route>
-          <Route path="/projetos" exact>
-            <ProjectsPage title="Projetos" card={true} images={IMAGESPROJECT} />
-          </Route>
-          <Redirect to="/" />
-        </Switch>
-        <Footer />
-      </Router>
-    </div>
+    <Router history={history}>
+      <div className="Mainheader">
+        <img
+          className="pseudo-background-img"
+          srcSet={`${headerMobileSrc} 768w, ${headerNormalSrc} 2400w, ${headerLargeSrc} 3040w`}
+          src={headerNormalSrc}
+          alt="header"
+        />
+        <MainHeader width={calculations.width} />
+        {calculations.width > MOBILE_WIDTH ? (
+          <MainHeaderMenu
+            currentPath={props.currentPath}
+            scrollContacts={props.scrollContacts}
+            changePath={props.changePath}
+          />
+        ) : (
+          <MobileMenu isOpen={headerMenu} handleOpenMenu={handleOpenMenu} />
+        )}
+      </div>
+      {calculations.width <= MOBILE_WIDTH ? (
+        <HeaderMobileMenu handleOpenMenu={handleOpenMenu} open={headerMenu} />
+      ) : null}
+      <Switch>
+        <Route path="/" exact>
+          <Home calculations={calculations} />
+        </Route>
+        <Route path="/portfolio" exact>
+          <Portfolio title="Porfólio" card={false} images={IMAGESPORTFOLIO} />
+        </Route>
+        <Route path="/projetos" exact>
+          <ProjectsPage title="Projetos" card={true} images={IMAGESPROJECT} />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+      <Footer />
+    </Router>
   );
 });
 

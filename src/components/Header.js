@@ -3,10 +3,6 @@ import { useInView } from "react-intersection-observer";
 import { Icon, Menu, Container, Header } from "semantic-ui-react";
 import { MOBILE_WIDTH } from "./util/Const";
 
-const headerLargeSrc = `/images/cetteup-IC5sX-7PRN8-unsplash-large.webp`;
-const headerNormalSrc = `/images/cetteup-IC5sX-7PRN8-unsplash.webp`;
-const headerMobileSrc = `/images/cetteup-IC5sX-7PRN8-unsplash-mobile.webp`;
-
 const MainHeader = React.memo((props) => {
   function handleItemClick() {
     console.log("this");
@@ -30,12 +26,6 @@ const MainHeader = React.memo((props) => {
   return (
     <div className="masthead header-white" ref={ref}>
       <Menu color="brown" secondary size="huge" className="header-cs">
-        <img
-          className="pseudo-background-img"
-          srcSet={`${headerMobileSrc} 768w, ${headerNormalSrc} 2400w, ${headerLargeSrc} 3040w`}
-          src={headerNormalSrc}
-          alt="header"
-        />
         <Menu.Item name="Principal">
           <Icon name="copyright outline" />
           Manuel Prates &amp; Filhos
